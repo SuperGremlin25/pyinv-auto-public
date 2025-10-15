@@ -1,0 +1,6 @@
+{
+    "watch_folder": "./invoices",
+    "output_csv": "./invoices_parsed.csv",
+    "file_extensions": [".pdf"],
+    "watch_mode": true
+}

@@ -147,9 +147,12 @@ class InvoiceWatcher(FileSystemEventHandler):
 
 def load_config(config_path):
     """Load configuration from JSON file."""
+    # Get script directory for relative paths
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
     default_config = {
-        'watch_folder': './invoices',
-        'output_csv': './invoices_parsed.csv',
+        'watch_folder': os.path.join(script_dir, 'invoices'),
+        'output_csv': os.path.join(script_dir, 'invoices_parsed.csv'),
         'file_extensions': ['.pdf'],
         'watch_mode': True
     }

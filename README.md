@@ -100,7 +100,8 @@ The tool uses a `config.json` file for default settings:
     "watch_folder": "./invoices",
     "output_csv": "./invoices_parsed.csv",
     "file_extensions": [".pdf"],
-    "watch_mode": true
+    "watch_mode": true,
+    "log_level": "INFO"
 }
 ```
 
@@ -110,6 +111,7 @@ The tool uses a `config.json` file for default settings:
 - `output_csv`: Path to the output CSV file
 - `file_extensions`: List of file extensions to process (default: [".pdf"])
 - `watch_mode`: Enable/disable continuous monitoring (true/false)
+- `log_level`: Logging verbosity - "DEBUG", "INFO", "WARNING", "ERROR" (default: "INFO")
 
 ### Custom Configuration
 

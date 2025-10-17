@@ -2,5 +2,6 @@
     "watch_folder": "./invoices",
     "output_csv": "./invoices_parsed.csv",
     "file_extensions": [".pdf"],
-    "watch_mode": true
+    "watch_mode": true,
+    "log_level": "INFO"
 }

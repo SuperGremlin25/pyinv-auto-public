@@ -19,6 +19,7 @@ A powerful Python-based CLI tool for automatically watching folders and parsing 
 
 - [Installation](#installation)
 - [Quick Start](#quick-start)
+- [Docker Setup](#docker-setup)
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Windows Scheduler Setup](#windows-scheduler-setup)
@@ -88,6 +89,29 @@ The tool will:
 2. Continue watching for new files
 3. Automatically process new PDFs as they appear
 4. Press `Ctrl+C` to stop watching
+
+## 🐳 Docker Setup
+
+Want to run PyInv-Auto in Docker? We've got you covered!
+
+### Quick Docker Start
+
+```bash
+# Using Docker Compose (easiest)
+docker-compose up
+
+# Or build and run manually
+docker build -t pyinv-auto .
+docker run --rm -v "$(pwd)/invoices:/app/invoices" -v "$(pwd)/output:/app/output" pyinv-auto
+```
+
+**Benefits of Docker:**
+- No Python installation needed
+- Runs anywhere (Windows, Mac, Linux)
+- Isolated environment
+- Easy deployment
+
+📖 **See [DOCKER_SETUP.md](DOCKER_SETUP.md) for complete Docker documentation**
 
 ## ⚙️ Configuration
 

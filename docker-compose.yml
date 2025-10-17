@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  pyinv-auto:
+    build: .
+    container_name: pyinv-auto
+    volumes:
+      # Mount your local invoice folder
+      - ./invoices:/app/invoices
+      # Mount logs for debugging
+      - ./logs:/app/logs
+      # Mount output directory for CSV
+      - ./output:/app/output
+    environment:
+      # Optional: Override config via environment variables
+      - PYTHONUNBUFFERED=1
+    # For watch mode (continuous monitoring):
+    # command: python pyinv_auto.py
+    # restart: unless-stopped
+    # For process-only mode (default - run once and exit):
+    command: python pyinv_auto.py --process-only

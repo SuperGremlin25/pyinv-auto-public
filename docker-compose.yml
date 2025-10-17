@@ -5,12 +5,12 @@ services:
     build: .
     container_name: pyinv-auto
     volumes:
-      # Mount your local invoice folder
-      - ./invoices:/app/invoices
+      # Mount C:\Invoices to container's /app/invoices
+      - C:\Invoices:/app/invoices
+      # Mount C:\Results for CSV output
+      - C:\Results:/app/output
       # Mount logs for debugging
       - ./logs:/app/logs
-      # Mount output directory for CSV
-      - ./output:/app/output
     environment:
       # Optional: Override config via environment variables
       - PYTHONUNBUFFERED=1
@@ -18,4 +18,4 @@ services:
     # command: python pyinv_auto.py
     # restart: unless-stopped
     # For process-only mode (default - run once and exit):
-    command: python pyinv_auto.py --process-only
+    command: python pyinv_auto.py --watch-folder /app/invoices --output /app/output/invoices_parsed.csv --process-only

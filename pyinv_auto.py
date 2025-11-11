@@ -144,7 +144,7 @@ class InvoiceWatcher(FileSystemEventHandler):
     """Watch for new invoice files and process them."""
     
     def __init__(self, watch_folder, output_csv, config):
-        self.watch_folder = watch_folder
+        self.watch_folder = os.path.abspath(watch_folder)
         self.output_csv = output_csv
         self.config = config
         self.parser = InvoiceParser()
@@ -169,6 +169,15 @@ class InvoiceWatcher(FileSystemEventHandler):
             self.logger.info("No existing CSV file found, starting fresh")
         except Exception as e:
             self.logger.error(f"Error loading processed files: {e}")
+    
+    def _is_path_safe(self, file_path):
+        """Validate that file path is within the watched folder (prevent path traversal)."""
+        try:
+            real_path = os.path.abspath(os.path.realpath(file_path))
+            real_watch_folder = os.path.abspath(os.path.realpath(self.watch_folder))
+            return real_path.startswith(real_watch_folder + os.sep) or real_path == real_watch_folder
+        except (OSError, ValueError):
+            return False
     
     def _write_to_csv(self, invoice_data):
         """Write invoice data to CSV file (thread-safe)."""
@@ -224,6 +233,11 @@ class InvoiceWatcher(FileSystemEventHandler):
     def process_file(self, file_path):
         """Process a single invoice file."""
         filename = os.path.basename(file_path)
+        
+        # Security: Validate file path is within watched folder
+        if not self._is_path_safe(file_path):
+            self.logger.warning(f"Security: Rejecting file outside watch folder: {file_path}")
+            return
         
         # Check if already processed
         if filename in self.processed_files:

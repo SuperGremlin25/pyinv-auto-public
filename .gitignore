@@ -6,6 +6,14 @@ invoices_parsed.csv
 invoices/
 processed/
 
+# Sensitive files
+.env
+.env.local
+secrets.json
+credentials.json
+*_secret*
+*_private*
+
 # Python
 __pycache__/
 *.py[cod]
@@ -39,7 +47,7 @@ ENV/
 .vscode/
 .idea/
 *.swp
-*.swo
+.swo
 *~
 .DS_Store
 
@@ -58,3 +66,8 @@ htmlcov/
 
 # Docker
 output/
+
+# Backup files
+*.bak
+*.backup
+*~
